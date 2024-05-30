@@ -31,13 +31,13 @@ module "blog_vpc" {
   }
 }
 
-module "autoscaling" {
+module "blog_autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "7.4.1"
   
   name     = "${var.environment.name}-blog"
-  min_size = var.asg_min_size.default
-  max_size = var.asg_max_size.default
+  min_size = var.asg_min.default
+  max_size = var.asg_max.default
 
   vpc_zone_identifier = module.blog_vpc.public_subnets
   target_group_arns   = module.blog_alb.target_group_arns
